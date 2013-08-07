@@ -37,9 +37,12 @@ public class MerryChristmas {
 	public void PreInit(FMLPreInitializationEvent event){
 		loader.initObjects();
 	}
+
+//TODO: Add a 'Kevin' pet.
 	
 @EventHandler
 	public void Init(FMLInitializationEvent event){
+		loader.registerBlocks();
 		loader.addNames();
 		try {loader.recipies("Crafting");} catch (Exception e){
 			System.err.println("Already Finished!");

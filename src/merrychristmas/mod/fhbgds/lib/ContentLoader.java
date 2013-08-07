@@ -1,11 +1,16 @@
 package merrychristmas.mod.fhbgds.lib;
 
+import merrychristmas.mod.fhbgds.block.BlockDethornedCactus;
 import merrychristmas.mod.fhbgds.item.ItemCactusArmor;
+import merrychristmas.mod.fhbgds.item.ItemCactusPick;
 import merrychristmas.mod.fhbgds.item.ItemSpikeGem;
 import merrychristmas.mod.fhbgds.item.ItemSpikeShard;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumArmorMaterial;
+import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.EnumHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -21,24 +26,31 @@ public class ContentLoader {
 	public static ItemCactusArmor boots;
 	public static Item spikeGem;
 	public static Item spikeShard;
-	public static final EnumArmorMaterial CACTUS = EnumHelper.addArmorMaterial("CACTUS", 50, new int[] {3, 8, 6, 3}, 15);
+	public static Item cactusPick;
+	public static Block dethornedCactus;
+	public static final EnumToolMaterial CACTUS = EnumHelper.addToolMaterial("CACTUS", 3, 1800, 10.0F, 6.0F, 15);
+	public static final EnumArmorMaterial CACTUS_SHARD = EnumHelper.addArmorMaterial("CACTUS", 50, new int[] {3, 8, 6, 3}, 15);
 	
 	public void initObjects(){
-		helmet = (ItemCactusArmor) new ItemCactusArmor(512, 0, CACTUS).setUnlocalizedName("cactusHelmet")
+		helmet = (ItemCactusArmor) new ItemCactusArmor(512, 0, CACTUS_SHARD).setUnlocalizedName("cactusHelmet")
 				.setCreativeTab(tab);
 		
-		plate = (ItemCactusArmor) new ItemCactusArmor(513, 1, CACTUS).setUnlocalizedName("cactusPlate")
+		plate = (ItemCactusArmor) new ItemCactusArmor(513, 1, CACTUS_SHARD).setUnlocalizedName("cactusPlate")
 				.setCreativeTab(tab);
 		
-		leggings = (ItemCactusArmor) new ItemCactusArmor(514, 2, CACTUS).setUnlocalizedName("cactusLeggings")
+		leggings = (ItemCactusArmor) new ItemCactusArmor(514, 2, CACTUS_SHARD).setUnlocalizedName("cactusLeggings")
 				.setCreativeTab(tab);
 		
-		boots = (ItemCactusArmor) new ItemCactusArmor(515, 3, CACTUS).setUnlocalizedName("cactusBoots")
+		boots = (ItemCactusArmor) new ItemCactusArmor(515, 3, CACTUS_SHARD).setUnlocalizedName("cactusBoots")
 				.setCreativeTab(tab);
 		
 		spikeGem = new ItemSpikeGem(516).setUnlocalizedName("spikeGem").setCreativeTab(tab);
 		
 		spikeShard = new ItemSpikeShard(517).setUnlocalizedName("spikeShard").setCreativeTab(tab);
+		
+		cactusPick = new ItemCactusPick(518, CACTUS).setUnlocalizedName("cactusPick").setCreativeTab(tab);
+		
+		dethornedCactus = new BlockDethornedCactus(580).setUnlocalizedName("dethornedCactus").setCreativeTab(tab);
 	}
 	
 	public void addNames(){
@@ -46,8 +58,10 @@ public class ContentLoader {
 		LanguageRegistry.instance().addStringLocalization("item.cactusPlate.name", "en_US", "Girrenian Cactus Chestplate");
 		LanguageRegistry.instance().addStringLocalization("item.cactusLeggings.name", "en_US", "Girrenian Cactus Leggings");
 		LanguageRegistry.instance().addStringLocalization("item.cactusBoots.name", "en_US", "Girrenian Cactus Boots");
-		LanguageRegistry.instance().addStringLocalization("item.spikeShard.name", "en_US", "Girrenian Spike Shard");
-		LanguageRegistry.instance().addStringLocalization("item.spikeGem.name", "en_US", "Girrenian Spike Gem");
+		LanguageRegistry.instance().addStringLocalization("item.spikeShard.name", "en_US", "Girrenian Cactus Ingot");
+		LanguageRegistry.instance().addStringLocalization("item.spikeGem.name", "en_US", "Girrenian Cactus Gem");
+		LanguageRegistry.instance().addStringLocalization("item.cactusPick.name", "en_US", "Girrenian Cactus Pickaxe");
+		LanguageRegistry.instance().addStringLocalization("tile.dethornedCactus.name", "en_US", "Dethorned Cactus");
 	}
 	
 	public void recipies(String type) throws Exception{
@@ -59,16 +73,21 @@ public class ContentLoader {
 			finishedRegisterSmelting = true;
 		}else if(!finishedRegisterCrafting){
 			GameRegistry.addRecipe(new ItemStack(spikeGem), new Object[] {"###", "#D#", "###",
-				'#', Block.cactus, 'D', Item.diamond});
+				'#', new ItemStack(Item.dyePowder, 1, 2), 'D', Item.diamond});
 			GameRegistry.addRecipe(new ItemStack(helmet), new Object[] {"###", "# #", '#', spikeShard});
 			GameRegistry.addRecipe(new ItemStack(plate), new Object[] {"# #", "###", "###", '#', spikeShard});
 			GameRegistry.addRecipe(new ItemStack(leggings), new Object[] {"###", "# #", "# #", '#', spikeShard});
 			GameRegistry.addRecipe(new ItemStack(boots), new Object[] {"# #", "# #", '#', spikeShard});
+			GameRegistry.addRecipe(new ItemStack(dethornedCactus), new Object[] {"#", '#', Block.cactus});
 			finishedRegisterCrafting = true;
 		}else if(finishedRegisterCrafting){
 			throw new Exception("Already Finished!");
 		}else if(finishedRegisterSmelting){
 			throw new Exception("Already Finished!");
 		}
+	}
+
+	public void registerBlocks() {
+		GameRegistry.registerBlock(dethornedCactus, Reference.MOD_ID + dethornedCactus.getUnlocalizedName());
 	}
 }	
