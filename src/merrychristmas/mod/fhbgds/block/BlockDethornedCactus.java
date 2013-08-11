@@ -38,13 +38,12 @@ public class BlockDethornedCactus extends Block implements IPlantable{
 			world.setBlockToAir(x, y, z);
 			world.setBlockToAir(x, y - 1, z);
 			world.setBlockToAir(x, y - 2, z);
-			EntityKevin kevin = new EntityKevin(world, x, y, z);
-			
+			EntityKevin kevin = new EntityKevin(world);
+			kevin.setPos(x, y, z);
 			world.spawnEntityInWorld(kevin);
 			world.notifyBlockChange(x, y, z, 0);
             world.notifyBlockChange(x, y - 1, z, 0);
             world.notifyBlockChange(x, y - 2, z, 0);
-            kevin.moveEntity(0, 1, 0);
 		}
 	}
 	

@@ -28,18 +28,19 @@ public class EntityKevin extends EntityMob{
 	int yPos;
 	int zPos;
 	
-	public EntityKevin(World world, int x, int y, int z) {
+	public EntityKevin(World world) {
 		super(world);
-		this.setPos(x, y, z);
+		this.setEntityHealth(getMaxHealth());
 		this.setSize(0.9F, 3.0F);
-		this.boundingBox.setBounds(x, y, z, x + 1, y + 3, z + 1);
 		this.tasks.addTask(2, new EntityAIWander(this, 6.0F));
         this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(3, new EntityAILookIdle(this));
 	}
 	
 	@Override
-	public void entityInit(){}
+	public void entityInit(){
+		super.entityInit();
+	}
 	
 	@Override
 	public void collideWithEntity(Entity entity){
@@ -66,6 +67,7 @@ public class EntityKevin extends EntityMob{
 		this.posZ = (double) z + 0.5;
 		this.rotationPitch = 0;
 		this.rotationYaw = 0;
+		this.boundingBox.setBounds(x, y, z, x + 1, y + 3, z + 1);
 	}
 	
 	@Override
