@@ -9,7 +9,7 @@ public class ProxyClient extends ProxyCommon {
 
 	@Override
 	public void addRenderer(){
-		RenderingRegistry.registerEntityRenderingHandler(EntityKevin.class, new RenderKevin());
+		RenderingRegistry.registerEntityRenderingHandler(EntityKevin.class, new RenderKevin(new ModelKevin(), 0.5F));
 	}
 	
 }

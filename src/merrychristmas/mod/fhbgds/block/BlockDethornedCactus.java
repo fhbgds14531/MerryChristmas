@@ -45,6 +45,7 @@ public class BlockDethornedCactus extends Block implements IPlantable{
             world.notifyBlockChange(x, y - 1, z, 0);
             world.notifyBlockChange(x, y - 2, z, 0);
 		}
+		super.onBlockAdded(world, x, y, z);
 	}
 	
 	@Override

@@ -55,6 +55,7 @@ public class MerryChristmas {
 
 @EventHandler
 	public void PostInit(FMLPostInitializationEvent event){
-		EntityRegistry.registerModEntity(EntityKevin.class, "kevin", 50, this, 64, 10, true);
+		EntityRegistry.registerModEntity(EntityKevin.class, "Kevin", 1, this, 32, 5, true);
+		EntityRegistry.registerGlobalEntityID(EntityKevin.class, "Kevin", EntityRegistry.findGlobalUniqueEntityId(), 3515848, 12102);
 	}
 }

@@ -1,6 +1,9 @@
 package merrychristmas.mod.fhbgds.entity;
 
+import java.util.Random;
+
 import merrychristmas.mod.fhbgds.lib.ContentLoader;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityCreature;
@@ -24,6 +27,7 @@ import net.minecraft.world.World;
 
 public class EntityKevin extends EntityMob{
 
+	Random random = new Random();
 	int xPos;
 	int yPos;
 	int zPos;
@@ -32,9 +36,11 @@ public class EntityKevin extends EntityMob{
 		super(world);
 		this.setEntityHealth(getMaxHealth());
 		this.setSize(0.9F, 3.0F);
-		this.tasks.addTask(2, new EntityAIWander(this, 6.0F));
+		this.tasks.addTask(2, new EntityAIWander(this, 0.2F));
         this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(3, new EntityAILookIdle(this));
+        this.setCustomNameTag("Kevin");
+        this.setAlwaysRenderNameTag(true);
 	}
 	
 	@Override
@@ -53,7 +59,7 @@ public class EntityKevin extends EntityMob{
 	
 	@Override
 	public void onEntityUpdate(){
-		
+		super.onEntityUpdate();
 	}
 	
 	@Override
@@ -102,6 +108,12 @@ public class EntityKevin extends EntityMob{
 	
 	@Override
 	protected void dropFewItems(boolean par1, int par2){
-		super.dropFewItems(par1, par2);
+		int drop = random.nextInt(4);
+		this.dropItem(this.getDropItemId(), drop);
+	}
+	
+	@Override
+	public String getEntityName(){
+		return "Kevin";
 	}
 }
