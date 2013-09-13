@@ -13,17 +13,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderKevin extends RenderLiving {
-	private static final ResourceLocation field_110833_a = new ResourceLocation(Reference.MOD_ID, "textures/entity/kevin.png");
+	private static final ResourceLocation textureLoc = new ResourceLocation(Reference.MOD_ID, "textures/entity/kevin.png");
 
 	public RenderKevin(ModelBase model, float par2){
 		super(model, par2);
 	}
 	
-	protected ResourceLocation func_110832_a(EntityLiving entity){
-        return field_110833_a;
+	protected ResourceLocation getTextureLoc(EntityLiving entity){
+        return textureLoc;
     }
 
-    protected ResourceLocation func_110775_a(Entity entity){
-        return this.func_110832_a((EntityLiving)entity);
-    }
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return this.getTextureLoc((EntityLiving)entity);
+	}
 }

@@ -3,6 +3,7 @@ package merrychristmas.mod.fhbgds.lib;
 import merrychristmas.mod.fhbgds.block.BlockDethornedCactus;
 import merrychristmas.mod.fhbgds.item.ItemCactusArmor;
 import merrychristmas.mod.fhbgds.item.ItemCactusPick;
+import merrychristmas.mod.fhbgds.item.ItemGauntlet;
 import merrychristmas.mod.fhbgds.item.ItemSpikeGem;
 import merrychristmas.mod.fhbgds.item.ItemSpikeShard;
 import net.minecraft.block.Block;
@@ -28,8 +29,9 @@ public class ContentLoader {
 	public static Item spikeShard;
 	public static Item cactusPick;
 	public static Block dethornedCactus;
+	public static Item gauntlet;
 	public static final EnumToolMaterial CACTUS = EnumHelper.addToolMaterial("CACTUS", 3, 1800, 10.0F, 6.0F, 15);
-	public static final EnumArmorMaterial CACTUS_SHARD = EnumHelper.addArmorMaterial("CACTUS", 50, new int[] {3, 8, 6, 3}, 15);
+	public static final EnumArmorMaterial CACTUS_SHARD = EnumHelper.addArmorMaterial("CACTUS", 60, new int[] {5, 10, 8, 5}, 20);
 	
 	public void initObjects(){
 		helmet = (ItemCactusArmor) new ItemCactusArmor(512, 0, CACTUS_SHARD).setUnlocalizedName("cactusHelmet")
@@ -51,6 +53,8 @@ public class ContentLoader {
 		cactusPick = new ItemCactusPick(518, CACTUS).setUnlocalizedName("cactusPick").setCreativeTab(tab);
 		
 		dethornedCactus = new BlockDethornedCactus(580).setUnlocalizedName("dethornedCactus").setCreativeTab(tab);
+		
+		gauntlet = new ItemGauntlet(581, CACTUS).setUnlocalizedName("gauntlet").setCreativeTab(tab);
 	}
 	
 	public void addNames(){
@@ -62,6 +66,7 @@ public class ContentLoader {
 		LanguageRegistry.instance().addStringLocalization("item.spikeGem.name", "en_US", "Girrenian Cactus Gem");
 		LanguageRegistry.instance().addStringLocalization("item.cactusPick.name", "en_US", "Girrenian Cactus Pickaxe");
 		LanguageRegistry.instance().addStringLocalization("tile.dethornedCactus.name", "en_US", "Dethorned Cactus");
+		LanguageRegistry.instance().addStringLocalization("item.gauntlet.name", "en_US", "Girrenian Cactus Gauntlet");
 	}
 	
 	public void recipies(String type) throws Exception{
@@ -72,13 +77,14 @@ public class ContentLoader {
 			GameRegistry.addSmelting(spikeGem.itemID, new ItemStack(spikeShard), 1.5F);
 			finishedRegisterSmelting = true;
 		}else if(!finishedRegisterCrafting){
-			GameRegistry.addRecipe(new ItemStack(spikeGem), new Object[] {"###", "#D#", "###",
+			GameRegistry.addRecipe(new ItemStack(spikeGem), new Object[] {"#D#", "D#D", "#D#",
 				'#', new ItemStack(Item.dyePowder, 1, 2), 'D', Item.diamond});
 			GameRegistry.addRecipe(new ItemStack(helmet), new Object[] {"###", "# #", '#', spikeShard});
 			GameRegistry.addRecipe(new ItemStack(plate), new Object[] {"# #", "###", "###", '#', spikeShard});
 			GameRegistry.addRecipe(new ItemStack(leggings), new Object[] {"###", "# #", "# #", '#', spikeShard});
 			GameRegistry.addRecipe(new ItemStack(boots), new Object[] {"# #", "# #", '#', spikeShard});
 			GameRegistry.addRecipe(new ItemStack(dethornedCactus), new Object[] {"#", '#', Block.cactus});
+			GameRegistry.addRecipe(new ItemStack(gauntlet), new Object[] {"## ", "## ", "  #", '#', spikeShard});
 			finishedRegisterCrafting = true;
 		}else if(finishedRegisterCrafting){
 			throw new Exception("Already Finished!");

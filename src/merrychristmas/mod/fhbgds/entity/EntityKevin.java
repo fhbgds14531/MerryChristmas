@@ -34,7 +34,7 @@ public class EntityKevin extends EntityMob{
 	
 	public EntityKevin(World world) {
 		super(world);
-		this.setEntityHealth(getMaxHealth());
+		this.setHealth(20);
 		this.setSize(0.9F, 3.0F);
 		this.tasks.addTask(2, new EntityAIWander(this, 0.2F));
         this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -51,10 +51,6 @@ public class EntityKevin extends EntityMob{
 	@Override
 	public void collideWithEntity(Entity entity){
 		super.collideWithEntity(entity);
-	}
-	
-	public float getMaxHealth(){
-		return 20.0f;
 	}
 	
 	@Override

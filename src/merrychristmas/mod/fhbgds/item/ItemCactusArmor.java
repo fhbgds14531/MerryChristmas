@@ -41,4 +41,10 @@ public class ItemCactusArmor extends ItemArmor {
 		ContentLoader.leggings.itemIcon = r.registerIcon(Reference.MOD_ID + ":cactusLeggings");
 		ContentLoader.boots.itemIcon = r.registerIcon(Reference.MOD_ID + ":cactusBoots");
 	}
+	
+	@Override
+	public void onCreated(ItemStack stack, World world, EntityPlayer player) {
+		stack.addEnchantment(Enchantment.thorns, 6);
+		stack.addEnchantment(Enchantment.protection, 3);
+	}
 }

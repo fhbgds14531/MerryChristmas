@@ -1,9 +1,9 @@
 package merrychristmas.mod.fhbgds.client;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import merrychristmas.mod.fhbgds.common.ProxyCommon;
 import merrychristmas.mod.fhbgds.entity.EntityKevin;
 import merrychristmas.mod.fhbgds.render.RenderKevin;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ProxyClient extends ProxyCommon {
 
