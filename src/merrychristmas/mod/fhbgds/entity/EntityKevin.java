@@ -3,42 +3,42 @@ package merrychristmas.mod.fhbgds.entity;
 import java.util.Random;
 
 import merrychristmas.mod.fhbgds.lib.ContentLoader;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityOwnable;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.ai.EntityAIFleeSun;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityGolem;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySnowman;
-import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.passive.IAnimals;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class EntityKevin extends EntityMob{
+public class EntityKevin extends EntityCreature{
 
 	Random random = new Random();
+	private PathNavigate myNavigator = this.getNavigator();
 	int xPos;
 	int yPos;
 	int zPos;
+	private Attribute jumpHeight;
 	
 	public EntityKevin(World world) {
 		super(world);
+		this.myNavigator.setAvoidsWater(true);
+		this.myNavigator.setAvoidSun(true);
 		this.setHealth(20);
 		this.setSize(0.9F, 3.0F);
 		this.tasks.addTask(2, new EntityAIWander(this, 0.2F));
         this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(3, new EntityAILookIdle(this));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityCreeper.class, 16.0F, 1.0, 2.0F));
+        this.tasks.addTask(5, new EntityAIFleeSun(this, 1.0F));
+        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityCreeper.class, 6.0F));
         this.setCustomNameTag("Kevin");
         this.setAlwaysRenderNameTag(true);
 	}

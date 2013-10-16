@@ -1,3 +1,4 @@
+package merrychristmas.mod.fhbgds;
 import merrychristmas.mod.fhbgds.common.ProxyCommon;
 import merrychristmas.mod.fhbgds.entity.EntityKevin;
 import merrychristmas.mod.fhbgds.lib.ContentLoader;
@@ -38,24 +39,20 @@ public class MerryChristmas {
 @EventHandler
 	public void PreInit(FMLPreInitializationEvent event){
 		loader.initObjects();
+		proxy.addRenderer();
 	}
 
 @EventHandler
 	public void Init(FMLInitializationEvent event){
 		loader.registerBlocks();
 		loader.addNames();
-		try {loader.recipies("Crafting");} catch (Exception e){
-			System.err.println("Already Finished!");
-		}
-		
-		try {loader.recipies("Smelting");} catch (Exception e) {
-			System.err.println("Already Finished!");
-		}
+		loader.recipies("Crafting");
+		loader.recipies("Smelting");
 	}
 
 @EventHandler
 	public void PostInit(FMLPostInitializationEvent event){
 		EntityRegistry.registerModEntity(EntityKevin.class, "Kevin", 1, this, 32, 5, true);
-		EntityRegistry.registerGlobalEntityID(EntityKevin.class, "Kevin", EntityRegistry.findGlobalUniqueEntityId(), 3515848, 12102);
+		//EntityRegistry.registerGlobalEntityID(EntityKevin.class, "Kevin", EntityRegistry.findGlobalUniqueEntityId(), 3515848, 12102);
 	}
 }

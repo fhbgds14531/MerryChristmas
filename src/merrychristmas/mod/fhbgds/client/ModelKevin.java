@@ -9,9 +9,9 @@ public class ModelKevin extends ModelBase{
 	
     //fields
     //ModelRenderer body;
-	ModelRenderer Body1;
-    ModelRenderer Body2;
-    ModelRenderer Body3;
+	ModelRenderer leg;
+    ModelRenderer body;
+    ModelRenderer head;
   
   public ModelKevin()
   {
@@ -28,24 +28,24 @@ public class ModelKevin extends ModelBase{
 	    textureWidth = 64;
 	    textureHeight = 32;
 	    
-	      Body1 = new ModelRenderer(this, 0, 0);
-	      Body1.addBox(-7F, 0F, -7F, 14, 16, 14);
-	      Body1.setRotationPoint(0F, 8F, 0F);
-	      Body1.setTextureSize(textureWidth, textureHeight);
-	      Body1.mirror = true;
-	      setRotation(Body1, 0F, 45F, 0F);
-	      Body2 = new ModelRenderer(this, 0, 0);
-	      Body2.addBox(-7F, -16F, -7F, 14, 16, 14);
-	      Body2.setRotationPoint(0F, 8F, 0F);
-	      Body2.setTextureSize(textureWidth, textureHeight);
-	      Body2.mirror = true;
-	      setRotation(Body2, 0F, 0F, 0F);
-	      Body3 = new ModelRenderer(this, 0, 0);
-	      Body3.addBox(-7F, -16F, -7F, 14, 16, 14);
-	      Body3.setRotationPoint(0F, -8F, 0F);
-	      Body3.setTextureSize(textureWidth, textureHeight);
-	      Body3.mirror = true;
-	      setRotation(Body3, 0F, 0F, 0F);
+	      leg = new ModelRenderer(this, 0, 0);
+	      leg.addBox(-7F, 0F, -7F, 14, 16, 14);
+	      leg.setRotationPoint(0F, 8F, 0F);
+	      leg.setTextureSize(textureWidth, textureHeight);
+	      leg.mirror = true;
+	      setRotation(leg, 0F, 0F, 0F);
+	      body = new ModelRenderer(this, 0, 0);
+	      body.addBox(-7F, -16F, -7F, 14, 16, 14);
+	      body.setRotationPoint(0F, 8F, 0F);
+	      body.setTextureSize(textureWidth, textureHeight);
+	      body.mirror = true;
+	      setRotation(body, 0F, 0F, 0F);
+	      head = new ModelRenderer(this, 0, 0);
+	      head.addBox(-7F, -16F, -7F, 14, 16, 14);
+	      head.setRotationPoint(0F, -8F, 0F);
+	      head.setTextureSize(textureWidth, textureHeight);
+	      head.mirror = true;
+	      setRotation(head, 0F, 0F, 0F);
   }
   
   @Override
@@ -53,9 +53,9 @@ public class ModelKevin extends ModelBase{
   {
     super.render(entity, f, f1, f2, f3, f4, f5);
     setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    Body1.render(f5);
-    Body2.render(f5);
-    Body3.render(f5);
+    leg.render(f5);
+    body.render(f5);
+    head.render(f5);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z)

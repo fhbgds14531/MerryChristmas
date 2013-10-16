@@ -5,14 +5,12 @@ import java.util.Random;
 import merrychristmas.mod.fhbgds.entity.EntityKevin;
 import merrychristmas.mod.fhbgds.lib.Reference;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCactus;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.monster.EntitySnowman;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
@@ -24,6 +22,7 @@ import net.minecraftforge.common.IPlantable;
 public class BlockDethornedCactus extends Block implements IPlantable{
 
 	public Icon topIcon;
+	
 	
 	public BlockDethornedCactus(int par1) {
 		super(par1, Material.cactus);
@@ -39,8 +38,9 @@ public class BlockDethornedCactus extends Block implements IPlantable{
 			world.setBlockToAir(x, y - 1, z);
 			world.setBlockToAir(x, y - 2, z);
 			EntityKevin kevin = new EntityKevin(world);
-			kevin.setPos(x, y, z);
+			kevin.setLocationAndAngles(x, y - 1, z, 0, 0);
 			world.spawnEntityInWorld(kevin);
+	        kevin.addPotionEffect(new PotionEffect(Potion.jump.id, Integer.MAX_VALUE, 2));
 			world.notifyBlockChange(x, y, z, 0);
             world.notifyBlockChange(x, y - 1, z, 0);
             world.notifyBlockChange(x, y - 2, z, 0);
@@ -60,12 +60,10 @@ public class BlockDethornedCactus extends Block implements IPlantable{
             return false;
         }else{
             int l = world.getBlockId(x, y - 1, z);
+            Block block = Block.blocksList[l];
 
-            if(l == Block.sand.blockID || l == this.blockID){
-            	return true;
-            }else{
-            	return false;
-            }
+            return l == Block.sand.blockID || l == this.blockID || block.canSustainPlant(world, x, y, z, ForgeDirection.UP, (IPlantable) Block.cactus);
+            
         }
     }
 
@@ -76,6 +74,12 @@ public class BlockDethornedCactus extends Block implements IPlantable{
 //        	player.addPotionEffect(new PotionEffect(10, 10, 0, false));
 //        	player.addPotionEffect(new PotionEffect(11, 10, 0, false));
 //        }
+		
+		if(entity instanceof EntityBoat){
+			entity.dropItem(Item.boat.itemID, 0);
+			entity.setDead();
+			
+		}
     }
 	
 	public void updateTick(World world, int x, int y, int z, Random random){
