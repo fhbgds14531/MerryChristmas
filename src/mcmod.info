@@ -6,9 +6,8 @@
   "modid": "merrychristmas",
   "name": "Merry Christmas, Girren!",
   "description": "Your mother said that our gifts had to be handmade, so here you go!",
-  "version": "0.5.1",
-  "mcversion": "1.6.2",
-  "url": "",
+  "version": "1.0",
+  "mcversion": "1.6.4",
   "authors": [
   "fhbgds"
   ],
@@ -17,7 +16,6 @@
   "requiredMods": [
   "Forge"
   ],
-  "dependencies": [ "MiscTweaks" ],
   "useDependancyInformation": "true"
 }
 ]
